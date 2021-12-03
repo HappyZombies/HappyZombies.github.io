@@ -1,33 +1,52 @@
-import "./App.css";
-import { Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createTheme, ThemeProvider, CssBaseline } from "@material-ui/core";
+
+import Home from "./Home";
+import About from "./About";
+
+import DisplayPostsList from "./components/DisplayPostsList";
+import DisplayPost from "./components/DisplayPost";
+import Nav from "./components/Nav";
+
+import projects from "./posts/projects/projects";
+import blogs from "./posts/blogs/blogs";
+
+const theme = createTheme({
+    palette: {
+        type: 'dark',
+        background: {
+            default: '#1d1f21'
+        },
+        secondary: {
+            main: '#61dafb'
+        }
+    },
+    typography: {
+        fontFamily: 'Fira Mono',
+        fontWeightLight: 400,
+        fontWeightMedium: 500,
+        fontWeightBold: 700
+    }
+});
 
 function App() {
-  return (
-    <div className="App App-center-screen">
-      <header className="App-header">
-        <h1>Daniel Reguero</h1>
-        <h4>
-          <b>&gt; I just wanna make stuff</b>
-        </h4>
-        <i>Isaiah 40:31</i>
-      </header>
-      <div>
-        <nav className="App-menu">
-          <ul>
-            <li className="App-link">
-              <Link to={`${process.env.PUBLIC_URL}/projects`}>projects</Link>
-            </li>
-            <li className="App-link">
-              <Link to={`${process.env.PUBLIC_URL}/blogs`}>blog</Link>
-            </li>
-            <li className="App-link">
-              <Link to={`${process.env.PUBLIC_URL}/about`}>about</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Nav />}>
+                        <Route path="about" element={<About />} />
+                        <Route path="projects" element={<DisplayPostsList posts={projects} type="projects" title="Projects" />} />
+                        <Route path="projects/:id" element={<DisplayPost />} />
+                        <Route path="blogs" element={<DisplayPostsList posts={blogs} type="blogs" title="Blog Posts" />} />
+                        <Route path="blogs/:id" element={<DisplayPost />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </ThemeProvider>
+    )
 }
 
 export default App;
