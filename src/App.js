@@ -39,9 +39,9 @@ function App() {
                     <Route path="/" element={<Nav />}>
                         <Route path="about" element={<About />} />
                         <Route path="projects" element={<DisplayPostsList posts={projects} type="projects" title="Projects" />} />
-                        <Route path="projects/:id" element={<DisplayPost />} />
+                        <Route path="projects/:id" element={<DisplayPost type="projects" />} />
                         <Route path="blogs" element={<DisplayPostsList posts={blogs} type="blogs" title="Blog Posts" />} />
-                        <Route path="blogs/:id" element={<DisplayPost />} />
+                        <Route path="blogs/:id" element={<DisplayPost type="blogs" />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

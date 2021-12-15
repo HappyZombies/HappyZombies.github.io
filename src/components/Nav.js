@@ -1,6 +1,6 @@
-import { makeStyles, AppBar, Toolbar, IconButton, Grid, Typography } from "@material-ui/core";
+import { makeStyles, AppBar, Toolbar, IconButton, Grid, Link } from "@material-ui/core";
 import { ArrowBackIos } from "@material-ui/icons";
-import { useNavigate, useLocation, Outlet } from "react-router-dom";
+import { useNavigate, useLocation, Outlet, Link as LinkRouter } from "react-router-dom";
 
 import routes from "../routes";
 
@@ -18,7 +18,6 @@ const BackButton = () => {
     let routeName = 'Home';
     if (!routes.find(r => `/${r}` === location.pathname)) {
         // if the route is not an exact match, the back button shall be whatever route matches closest the current route we are in.
-        console.log(routes.includes(location.pathname.substring(1)));
         for (let i = 0; i < routes.length; i++) {
             const r = routes[i];
             if (location.pathname.includes(r)) {
@@ -34,7 +33,9 @@ const BackButton = () => {
                 <IconButton size="medium" edge="start" color="secondary" sx={{ mr: 2 }} onClick={() => navigate(path)}>
                     <ArrowBackIos />
                 </IconButton>
-                <Typography variant="subtitle2" display="inline" color="secondary">{routeName}</Typography>
+                <Link component={LinkRouter} to={path} color="secondary" underline="none" variant="subtitle2" display="inline">
+                    {routeName}
+                </Link>
             </Grid>
         </Grid>
     )
