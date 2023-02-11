@@ -8,8 +8,9 @@ import DisplayPostsList from "./components/DisplayPostsList";
 import DisplayPost from "./components/DisplayPost";
 import Nav from "./components/Nav";
 
-import projects from "./posts/projects/projects";
-import blogs from "./posts/blogs/blogs";
+import posts from './posts';
+
+console.log(posts);
 
 const theme = createTheme({
     palette: {
@@ -38,9 +39,9 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/" element={<Nav />}>
                         <Route path="about" element={<About />} />
-                        <Route path="projects" element={<DisplayPostsList posts={projects} type="projects" title="Projects" />} />
+                        <Route path="projects" element={<DisplayPostsList posts={posts.projects} type="projects" title="Projects" />} />
                         <Route path="projects/:id" element={<DisplayPost type="projects" />} />
-                        <Route path="blogs" element={<DisplayPostsList posts={blogs} type="blogs" title="Blog Posts" />} />
+                        <Route path="blogs" element={<DisplayPostsList posts={posts.blogs} type="blogs" title="Blog Posts" />} />
                         <Route path="blogs/:id" element={<DisplayPost type="blogs" />} />
                     </Route>
                 </Routes>

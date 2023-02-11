@@ -1,4 +1,5 @@
-import { makeStyles, Container, Typography, List, ListItem, ListItemText, Link } from "@material-ui/core";
+import { makeStyles, Typography, ListItem, ListItemText, Link, Grid } from "@material-ui/core";
+import { useEffect } from "react";
 import { Link as LinkRouter } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -13,10 +14,12 @@ const useStyles = makeStyles({
 
 const PostsLinkListItem = ({ type, post }) => {
     const classes = useStyles();
+    // if (post.draft) {
+    //     return null;
+    // }
     return (
-        <ListItem>
+        <ListItem disableGutters>
             <ListItemText
-                primaryTypographyProps={{ align: 'center' }}
                 primary={
                     <>
                         <span className={classes.dataText}>{post.date}</span>
@@ -36,14 +39,20 @@ const PostsLinkListItem = ({ type, post }) => {
 
 function DisplayPostsLists({ title, type, posts }) {
     return (
-        <Container>
-            <Typography variant="h4" align="center" gutterBottom>{title}</Typography>
-            <div>
-                <List>
-                    {posts.map((post, i) => <PostsLinkListItem post={post} type={type} key={i} />)}
-                </List>
-            </div>
-        </Container>
+        <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+        >
+            <Grid item xs={3}>
+                <Typography variant="h4" gutterBottom>{title}</Typography>
+            </Grid>
+            <Grid item xs={5}>
+                {posts.map((post, i) => <PostsLinkListItem post={post} type={type} key={i} />)}
+            </Grid>
+        </Grid>
     )
 }
 

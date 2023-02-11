@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import matter from 'gray-matter';
 import { makeStyles, Container, Typography, Link } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -7,7 +8,7 @@ import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const useStyles = makeStyles({
     images: {
-        maxWidth: 500,
+        maxWidth: "100%",
     }
 })
 
@@ -20,10 +21,8 @@ function DisplayPost({ type }) {
     useEffect(() => {
         if (type === "blogs" || type === "projects") {
             let mdFile = null;
-            let config = null;
             try {
                 mdFile = require(`../posts/${type}/${params.id}`).default;
-                config = require(`../posts/${type}/${type}`).default;
             } catch (e) {
                 setMarkdownContent(notFoundText);
                 return;
@@ -31,9 +30,11 @@ function DisplayPost({ type }) {
             fetch(mdFile)
                 .then((res) => res.text())
                 .then((md) => {
-                    setMarkdownContent(md);
-                    const post = config.find((conf) => conf.path === params.id);
-                    setTitle(post.title);
+                    console.log(md);
+                    const data = matter(md);
+                    console.log(data);
+                    setMarkdownContent(data.content);
+                    setTitle(data.data.title);
                 })
                 .catch(() => {
                     setMarkdownContent(notFoundText);

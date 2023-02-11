@@ -19,9 +19,9 @@ function About() {
                     Hey there, I'm Daniel. A software engineer focused primarily on web
                     development.
                 </Typography>
-                <Typography className={classes.paragraph} gutterBottom>This blog is where I pretend to be an expert at things, and where I ask questions.</Typography>
+                <Typography className={classes.paragraph} gutterBottom>This blog is where I pretend to be an expert at things, and where I run into problems and attempt to solve them.</Typography>
                 <Typography className={classes.paragraph} gutterBottom>
-                    I enjoying coding in Node.js, and like using it along with relational databases in a lot of my personal
+                    I enjoying developing in Node.js, and like using it along with relational databases in a lot of my personal
                     applications. I also like to dabble in Unity sometimes and contribute to open source projects when I have the chance.
                 </Typography>
                 <Typography className={classes.paragraph} gutterBottom>
