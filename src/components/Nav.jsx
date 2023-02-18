@@ -4,16 +4,16 @@ import { Link as LinkRouter } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
 const StyledTypography = styled(Typography)(() => ({
-        padding: "6px 10px",
-        textTransform: "lowercase",
-        fontSize: "1.1rem"
-  }));
+    padding: "6px 10px",
+    textTransform: "lowercase",
+    fontSize: "1.1rem"
+}));
 
 const Nav = () => {
     return (
         <Container maxWidth="md">
-            <AppBar color="transparent" position="static" elevation={0} >
-                <Toolbar sx={{padding: "0!important"}}>
+            <AppBar color="transparent" position="static" elevation={0} sx={{ paddingBottom: "1rem" }}>
+                <Toolbar sx={{ padding: "0!important" }}>
                     <Box sx={{ flexGrow: 1 }} />
                     <StyledTypography>
                         <Link component={LinkRouter} to="/" color="secondary" underline="always">
@@ -30,7 +30,7 @@ const Nav = () => {
                             /projects
                         </Link>
                     </StyledTypography>
-                    <StyledTypography sx={{paddingRight: 0}}>
+                    <StyledTypography sx={{ paddingRight: 0 }}>
                         <Link component={LinkRouter} to="https://github.com/HappyZombies" color="secondary" underline="always" target="_blank" rel="noopener noreferrer">
                             /github
                         </Link>
