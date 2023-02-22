@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { Container, Typography, Link } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { a11yDark, dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 function DisplayPost({ type }) {
     const params = useParams();
@@ -23,23 +23,23 @@ function DisplayPost({ type }) {
                 setTitle(matterObj.data.title);
             }).catch(err => {
                 setMarkdownError(true);
-                console.log({err});
+                console.log({ err });
             })
             return;
         }
-    }, [])
+    })
 
-    if(markdownError) {
+    if (markdownError) {
         return (
             <Container>
-                <Typography variant="h4" align="center" sx={{paddingBottom: ".5em"}}>Not Found</Typography>
+                <Typography variant="h4" align="center" sx={{ paddingBottom: ".5em" }}>Not Found</Typography>
                 <Typography variant="body1" align="center">Sorry, couldn't find this post :&#40;</Typography>
             </Container>
         )
     }
     return (
         <Container>
-            <Typography variant="h4" align="center" sx={{paddingBottom: ".5em"}}>{title}</Typography>
+            <Typography variant="h4" align="center" sx={{ paddingBottom: ".5em" }}>{title}</Typography>
             <Container maxWidth="md">
                 <ReactMarkdown
                     components={{
@@ -59,7 +59,7 @@ function DisplayPost({ type }) {
                                     children={String(children).replace(/\n$/, '')}
                                     style={a11yDark}
                                     PreTag="span"
-                                    customStyle={{padding: "2px 5px", backgroundColor: "#2c3437"}} 
+                                    customStyle={{ padding: "2px 5px", backgroundColor: "#2c3437" }}
                                     {...props}
                                 />
                             )

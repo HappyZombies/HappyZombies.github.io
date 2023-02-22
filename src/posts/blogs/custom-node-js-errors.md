@@ -37,7 +37,7 @@ class NotFoundError extends Error {
 
 Now when we extend this class, we can have control over what new and additional properties we can send. So whether it's to rethrow an error or capture it in a log, the custom error class can give us extra information on what is going on.
 
-Just use the custom error the same way as the built in error class.
+Just use the custom error the same way as the built-in error class.
 
 ```js
 const { DatabaseError, NotFoundError } = require('../errors');
@@ -57,7 +57,7 @@ const findUserById = async (id) => {
 ```
 
 ## Benefit 1: Conditional Handling
-Imagine if we were to write a unit test for the method above. How would we test for the error case if we simply threw `new Error`? Well we'd have to catch the error based on the string value.
+Imagine if we were to write a unit test for the method above. How would we test for the error case if we simply threw `new Error`? Well, we'd have to catch the error based on the string value.
 
 ```js
 const { DatabaseError, NotFoundError } = require('../errors');
@@ -79,7 +79,7 @@ describe('when getting users by id', () => {
 });
 
 ```
-And the added benefit is not just for unit tests, but can be used for conditional logic in our code too.
+And the added benefit is not just for unit tests but can be used for conditional logic in our code too.
 ```js
 const { NotFoundError } = require('../errors');
 const { findUserById } = require('../index')
@@ -141,15 +141,15 @@ DatabaseError: Error when getting user.
 }
 ```
 
-## Benefit 3: Quicker to Idenitify
+## Benefit 3: Quicker to Identify
 
-Notice from the error thrown above, that it contains our class name. This is also a major benefit, because right away we can know what type of error this is/where it is coming from. 
+Notice from the error thrown above, that it contains our class name. This is also a major benefit because right away we can know what type of error this is/where it is coming from. 
 
 In this case, since it's a DatabaseError, we know that this pertains to an issue with our database.
 
 ## Custom Errors That Every Dev Should Have
 
-Generally, I would recommended at least these three types of custom errors. Of course, your use case may vary depending on what you are building.
+Generally, I would recommend  ed at least these three types of custom errors. Of course, your use case may vary depending on what you are building.
 
 ### Startup Error
 ```js
@@ -180,7 +180,7 @@ class ApiError extends Error {
 ```
 These errors apply to everything that will be sent via our API and will also include any HTTP error status codes.
 
-You can also get extra fancy and make consistent HTTP errors classes depending on the type of HTTP error you will be sending.
+You can also get extra fancy and make consistent HTTP error classes depending on the type of HTTP error you will be sending.
 
 ```js
 class NotFoundError extends ApiError {
@@ -202,16 +202,16 @@ class ApplicationError extends Error {
   }
 }
 ```
-I use Application Errors for "everything else" and/or custom error failure cases that aren't necessarly meant for a user. Additionally, I call the class ApplicationError, but I actually prefer to use the name of my application. So if the name of my app is called "Quiz App", I'd call it "QuizAppError".
+I use Application Errors for "everything else" and/or custom error failure cases that aren't necessarily meant for a user. Additionally, in this example I call the class ApplicationError, but I prefer to use the name of my application. So if the name of my app is called "Quiz App", I'd call it "QuizAppError".
 
-You'll notice that this class is exactly the same as the StartUpError. But what I am taking advantage of here is the name of class. When this error is thrown, I know that it is an specific error case that I have handled and caught, so it will contain the additional debugging information I have added.
+You'll notice that this class is the same as the StartUpError. But what I am taking advantage of here is the name of the class. When this error is thrown, I know that it is a specific error case that I have handled and caught, so it will contain the additional debugging information I have added.
 
 
 ## Conclusion
 
-Creating custom errors allows your application to be more flexible and easier to understand. Additionally, implementing them doesn't require much extra effort, and I can guarantee you that you, you're coworkers and as well as your users, will appreciate these explicit and detaield error messages.
+Creating custom errors allows your application to be more flexible and easier to understand. Additionally, implementing them doesn't require much extra effort, and I can guarantee you that you, you're coworkers, and as well as your users, will appreciate these explicit and detailed error messages.
 
 
 ### Resources
 
- Node.js Error Documentation: https://nodejs.org/api/errors.html#class-error
+[Node.js Error Documentation](https://nodejs.org/api/errors.html#class-error)

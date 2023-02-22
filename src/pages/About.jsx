@@ -1,17 +1,17 @@
-import { Container, Typography, Link } from "@mui/material";
+import { Typography, Link, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-const StyledDiv = styled('div')(() => ({
+const StyledContainer = styled(Container)(() => ({
     "& .MuiTypography-root": {
         margin: "1em 0"
     }
-  }));
+}));
 
 function About() {
     return (
         <>
             <Typography variant="h4" align="center" gutterBottom>About</Typography>
-            <StyledDiv maxWidth="md">
+            <StyledContainer maxWidth="md">
                 <Typography gutterBottom>
                     Hey there, I'm Daniel. A software engineer focused primarily on web
                     development.
@@ -24,7 +24,7 @@ function About() {
                 <Typography gutterBottom>
                     Follow me on <Link color="secondary" href="https://github.com/HappyZombies" target="_blank" rel="noopener noreferrer">GitHub</Link> where I come up with my latest idea and never finish it!
                 </Typography>
-            </StyledDiv>
+            </StyledContainer>
         </>
     );
 }
