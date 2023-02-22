@@ -12,17 +12,20 @@ import { Link as LinkRouter } from "react-router-dom";
 // })
 
 const PostsLinkListItem = ({ type, post }) => {
+    if(post.draft) {
+        return true;
+    }
     return (
         <ListItem disableGutters>
             <ListItemText
                 primary={
                     <>
-                        <span>{post.date}</span>
+                        <span style={{color: "#666", paddingRight: 20}}>{post.date}</span>
                         <Link component={LinkRouter} to={`${post.id}`} color="secondary" underline="always" display="inline">
                             {post.title}
                         </Link>
                         <span>
-                            <span>-</span>
+                            <span style={{padding: '0 10px'}}>-</span>
                             &#91;{post.category}&#93;
                         </span>
                     </>

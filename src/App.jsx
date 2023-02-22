@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 
 import Nav from "./components/Nav";
 import DisplayPostsList from "./components/DisplayPostsList";
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/projects/:id" element={<DisplayPost type="projects" />} />
             <Route path="/blogs" element={<DisplayPostsList posts={posts.blogs} title="Blog Posts" />} />
             <Route path="/blogs/:id" element={<DisplayPost type="blogs" />} />
+            <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

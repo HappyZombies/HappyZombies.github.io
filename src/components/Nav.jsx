@@ -12,7 +12,7 @@ const StyledTypography = styled(Typography)(() => ({
 const Nav = () => {
     return (
         <Container maxWidth="md">
-            <AppBar color="transparent" position="static" elevation={0} sx={{ paddingBottom: "1rem" }}>
+            <AppBar color="transparent" position="static" elevation={0} sx={{ paddingBottom: "0.5rem" }}>
                 <Toolbar sx={{ padding: "0!important" }}>
                     <Box sx={{ flexGrow: 1 }} />
                     <StyledTypography>

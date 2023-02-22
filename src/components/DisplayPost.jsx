@@ -4,42 +4,48 @@ import matter from 'gray-matter';
 import { Container, Typography, Link } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { a11yDark, dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 function DisplayPost({ type }) {
     const params = useParams();
-    const notFoundText = "## Not Found\nSorry, couldn't find this post :(";
     const [markdownContent, setMarkdownContent] = useState(null);
+    const [markdownError, setMarkdownError] = useState(false);
     const [title, setTitle] = useState("");
     useEffect(() => {
         if (type === "blogs" || type === "projects") {
-            import(`../posts/${type}/${params.id}.md`).then(res => {
-                fetch(res.default).then(res => res.text()).then((md) => {
-                    console.log(md);
-                    const data = matter(md);
-                    setMarkdownContent(data.content);
-                    setTitle(data.data.title);
-                }).catch((err) => {
-                    console.log(err);
-                    setMarkdownContent(notFoundText);
-                })
-            }).catch((err) => {
-                console.log(err);
-                setMarkdownContent(notFoundText);
+            const fetchMarkdownFile = async () => {
+                const mdFile = await import(`../posts/${type}/${params.id}.md`);
+                const markdown = await fetch(mdFile.default).then(res => res.text());
+                return matter(markdown);;
+            };
+            fetchMarkdownFile().then(matterObj => {
+                setMarkdownContent(matterObj.content);
+                setTitle(matterObj.data.title);
+            }).catch(err => {
+                setMarkdownError(true);
+                console.log({err});
             })
             return;
         }
-        return;
     }, [])
+
+    if(markdownError) {
+        return (
+            <Container>
+                <Typography variant="h4" align="center" sx={{paddingBottom: ".5em"}}>Not Found</Typography>
+                <Typography variant="body1" align="center">Sorry, couldn't find this post :&#40;</Typography>
+            </Container>
+        )
+    }
     return (
-        <Container sx={{ paddingTop: "1rem" }}>
-            <Typography variant="h4" align="center" gutterBottom>{title}</Typography>
+        <Container>
+            <Typography variant="h4" align="center" sx={{paddingBottom: ".5em"}}>{title}</Typography>
             <Container maxWidth="md">
                 <ReactMarkdown
                     components={{
                         a: ({ node, ...props }) => <Link color="secondary" {...props} />,
                         code({ node, inline, className, children, ...props }) {
-                            const match = /language-(\w+)/.exec(className || '')
+                            const match = /language-(\w+)/.exec(className || '');
                             return !inline && match ? (
                                 <SyntaxHighlighter
                                     children={String(children).replace(/\n$/, '')}
@@ -49,9 +55,13 @@ function DisplayPost({ type }) {
                                     {...props}
                                 />
                             ) : (
-                                <code className={className} {...props}>
-                                    {children}
-                                </code>
+                                <SyntaxHighlighter
+                                    children={String(children).replace(/\n$/, '')}
+                                    style={a11yDark}
+                                    PreTag="span"
+                                    customStyle={{padding: "2px 5px", backgroundColor: "#2c3437"}} 
+                                    {...props}
+                                />
                             )
                         },
                         img: ({ node, ...props }) => <img alt={props.alt} style={{ maxWidth: "100%" }} {...props} />,
