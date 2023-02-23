@@ -16,7 +16,7 @@ function DisplayPost({ type }) {
             const fetchMarkdownFile = async () => {
                 const mdFile = await import(`../posts/${type}/${params.id}.md`);
                 const markdown = await fetch(mdFile.default).then(res => res.text());
-                return matter(markdown);;
+                return matter(markdown);
             };
             fetchMarkdownFile().then(matterObj => {
                 setMarkdownContent(matterObj.content);
