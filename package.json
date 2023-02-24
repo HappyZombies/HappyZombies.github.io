@@ -3,13 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://happyzombies.github.io/",
+  "homepage": "https://happyzombies.github.io/#",
   "scripts": {
     "dev": "vite",
     "prebuild": "node ./scripts/compose.js",
     "build": "vite build",
     "eslint": "eslint . --ext .jsx",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d dist -t",
     "preview": "vite preview"
   },
   "dependencies": {
