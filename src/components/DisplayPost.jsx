@@ -11,6 +11,7 @@ function DisplayPost({ type }) {
     const [markdownContent, setMarkdownContent] = useState(null);
     const [markdownError, setMarkdownError] = useState(false);
     const [title, setTitle] = useState("");
+    const [date, setDate] = useState("");
     useEffect(() => {
         if (type === "blogs" || type === "projects") {
             const fetchMarkdownFile = async () => {
@@ -21,6 +22,7 @@ function DisplayPost({ type }) {
             fetchMarkdownFile().then(matterObj => {
                 setMarkdownContent(matterObj.content);
                 setTitle(matterObj.data.title);
+                setDate(matterObj.data.date);
             }).catch(err => {
                 setMarkdownError(true);
                 console.log({ err });
@@ -39,7 +41,8 @@ function DisplayPost({ type }) {
     }
     return (
         <Container>
-            <Typography variant="h4" align="center" sx={{ paddingBottom: ".5em" }}>{title}</Typography>
+            <Typography variant="h4" align="center" sx={{ paddingBottom: ".25em" }}>{title}</Typography>
+            <Typography variant="h6" align="center" sx={{ color: "#666", fontSize: "1.1rem" }}>{date}</Typography>
             <Container maxWidth="md">
                 <ReactMarkdown
                     components={{
