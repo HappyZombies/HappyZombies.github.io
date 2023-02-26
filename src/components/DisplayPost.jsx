@@ -5,6 +5,7 @@ import { Container, Typography, Link } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { Helmet } from "react-helmet-async";
 
 function DisplayPost({ type }) {
     const params = useParams();
@@ -34,6 +35,7 @@ function DisplayPost({ type }) {
     if (markdownError) {
         return (
             <Container>
+                <Helmet title={`Daniel Reguero Blog | Post Not Found`} />
                 <Typography variant="h4" align="center" sx={{ paddingBottom: ".5em" }}>Not Found</Typography>
                 <Typography variant="body1" align="center">Sorry, couldn't find this post :&#40;</Typography>
             </Container>
@@ -41,6 +43,7 @@ function DisplayPost({ type }) {
     }
     return (
         <Container>
+            <Helmet title={`Daniel Reguero Blog | ${title}`} />
             <Typography variant="h4" align="center" sx={{ paddingBottom: ".25em" }}>{title}</Typography>
             <Typography variant="h6" align="center" sx={{ color: "#666", fontSize: "1.1rem" }}>{date}</Typography>
             <Container maxWidth="md">
