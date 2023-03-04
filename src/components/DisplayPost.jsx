@@ -7,6 +7,13 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Helmet } from "react-helmet-async";
 
+const readingTime = (text) => {
+    const wpm = 225;
+    const words = text.trim().split(/\s+/).length;
+    const time = Math.ceil(words / wpm);
+    return `~${time} min read`;
+}
+
 function DisplayPost({ type }) {
     const params = useParams();
     const [markdownContent, setMarkdownContent] = useState(null);
@@ -34,18 +41,19 @@ function DisplayPost({ type }) {
 
     if (markdownError) {
         return (
-            <Container>
+            <>
                 <Helmet title={`Daniel Reguero Blog | Post Not Found`} />
                 <Typography variant="h4" align="center" sx={{ paddingBottom: ".5em" }}>Not Found</Typography>
                 <Typography variant="body1" align="center">Sorry, couldn't find this post :&#40;</Typography>
-            </Container>
+            </>
         )
     }
-    return (
-        <Container>
+    return (title && date && markdownContent && 
+        <>
             <Helmet title={`Daniel Reguero Blog | ${title}`} />
             <Typography variant="h4" align="center" sx={{ paddingBottom: ".25em" }}>{title}</Typography>
             <Typography variant="h6" align="center" sx={{ color: "#666", fontSize: "1.1rem" }}>{date}</Typography>
+            <Typography variant="h6" align="center" sx={{ color: "#666", fontSize: ".8rem" }}>{readingTime(markdownContent)}</Typography>
             <Container maxWidth="md">
                 <ReactMarkdown
                     components={{
@@ -72,11 +80,10 @@ function DisplayPost({ type }) {
                         },
                         img: ({ node, ...props }) => <img alt={props.alt} style={{ maxWidth: "100%" }} {...props} />,
                     }}
-
                     children={markdownContent}
                 />
             </Container>
-        </Container>
+        </>
     );
 }
 

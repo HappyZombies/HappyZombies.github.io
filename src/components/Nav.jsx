@@ -37,9 +37,9 @@ const Nav = () => {
                     </StyledTypography>
                 </Toolbar>
             </AppBar>
-            <div style={{ paddingBottom: "4em" }}>
+            <Container sx={{ paddingBottom: "2em" }}>
                 <Outlet />
-            </div>
+            </Container>
         </Container>
     )
 }
