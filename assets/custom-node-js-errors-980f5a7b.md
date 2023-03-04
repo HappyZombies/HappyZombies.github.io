@@ -1,6 +1,6 @@
 ---
 title: 'Custom Node.js Errors'
-date: '2023-02-24'
+date: '2023-03-04'
 category: node
 summary: Extending the Node.js error class should be known about and used 
 ---
@@ -53,10 +53,10 @@ const findUserById = async (id) => {
   return user;
 }
 ```
-You notice that for our custom error class, we pass along the original error when we ran `someDatabaseCall(id);`. It's important to pass the original error that occurred. If not, you may be potential losing information on the original cause of the error.
+Notice that for our custom error class, we pass along the original error when we ran `someDatabaseCall(id);`. It's important to pass the original error that occurred. If not, you may be potentially losing information on the original cause of the error.
 
 ## Benefit 1: Specific Unit Tests
-Imagine if we were to write a unit test for the method above. How would we test for the error case if we simply threw `new Error()` or we re-threw the error? Well, we'd have to catch the error based on the string value.
+Imagine if we were to write a unit test for the method above. How would we test for the error case if we simply threw `new Error()` or re-threw the error? Well, we'd have to catch the error based on the string value.
 
 ```js
 describe('when getting users by id', () => {
@@ -195,6 +195,7 @@ You'll notice that this class is the same as the StartUpError. But what I am tak
 Creating custom errors allows your application to be more flexible and easier to understand. Additionally, implementing them doesn't require much extra effort, and I can guarantee you that you, you're coworkers, and as well as your users, will appreciate these explicit and detailed error messages.
 
 
-### Resources
+### Resources and Tools
 
-[Node.js Error Documentation](https://nodejs.org/api/errors.html#class-error)
+* [Node.js Error Documentation](https://nodejs.org/api/errors.html#class-error)
+* [ChatGPT](https://openai.com/) for proof reading this post.
