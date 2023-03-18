@@ -57,6 +57,7 @@ function DisplayPost({ type }) {
             <Container maxWidth="md">
                 <ReactMarkdown
                     components={{
+                        blockquote: ({ node, ...props }) => <blockquote {...props} style={{borderLeft: "1px dotted #fff", fontSize: "80%", margin: "2em 0", padding: "0 1.5em" }}/>,
                         a: ({ node, ...props }) => <Link color="secondary" {...props} />,
                         code({ node, inline, className, children, ...props }) {
                             const match = /language-(\w+)/.exec(className || '');
